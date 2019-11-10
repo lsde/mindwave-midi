@@ -1,0 +1,3 @@
+git+https://github.com/robintibor/python-mindwave-mobile.git
+PyBluez==0.22
+python-rtmidi==1.3.1
