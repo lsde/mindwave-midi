@@ -25,8 +25,11 @@ if (mindwaveDataPointReader.isConnected()):
             dataPoint = mindwaveDataPointReader.readNextDataPoint()
             if (dataPoint.__class__ is RawDataPoint):
                 omindwave_value = int(dataPoint._readRawValue())
+
+                # Rescale the value to match MIDI spec
+                # https://stackoverflow.com/questions/929103/convert-a-number-range-to-another-range-maintaining-ratio
                 mindwave_value = int((((omindwave_value - -2048) * (127 - 0)) / (2048 - -2048)) + 0)
-                print(omindwave_value, mindwave_value)
+                print('RAW VALUE: {0}, MIDI VALUE: {1}'.format(omindwave_value, mindwave_value))
 
                 note_on = [0x90, mindwave_value, 112]
                 note_off = [0x80, mindwave_value, 0]
